@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>recipe world</title>
+   <style>
+      body {
+         margin: 0%;
+         background-color: rgb(4, 46, 24);
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+
+      }
+
+      #main {
+         background-image: url(https://cdn.shopify.com/s/files/1/0558/6413/1764/files/Food_Illustration_30_1024x1024.webp?v=1752063351);;
+         height: 636px;
+         width: 100%;
+         align-content: center;
+         background-repeat: no-repeat;
+         background-size: cover;
+         
+         
+      }
+
+      .second {
+         height: 400px;
+         width: 450px;
+         text-align: center;
+         align-content: center;
+         border-radius: 20px;
+         background-color: rgb(250, 216, 200);
+         margin-left: auto;
+         margin-right: auto;
+         
+      }
+
+      h1 {
+         font-size: 45px;
+
+      }
+
+      .inner {
+         height: 50px;
+         width: 90%;
+         border: 2px solid rgb(173, 160, 160);
+         margin: 25px;
+         text-align: center;
+         align-content: center;
+         font-size: x-large;
+         border-radius: 15px;
+         box-shadow: 3px 3px 5px rgb(88, 76, 76);
+         font-family: cursive;
+      }
+
+      .inner:hover {
+         background-color: rgb(143, 144, 163);
+         border: none;
+      }
+
+      section {
+         display: none;
+
+      }
+
+      #first {
+         display: flex;
+         flex-wrap: wrap;
+         padding: 10px;
+         justify-content: space-evenly;
+
+      }
+
+      #second {
+         display: flex;
+         flex-wrap: wrap;
+         padding: 10px;
+         justify-content: space-evenly;
+
+      }
+
+      #third {
+         display: flex;
+         flex-wrap: wrap;
+         padding: 10px;
+         justify-content: space-evenly;
+
+      }
+
+      #inn {
+         background-color: rgba(0, 0, 0, 0.945);
+         color: white;
+         height: 130px;
+         padding-left: 10px;
+         padding-right: 10px;
+
+      }
+
+      .in {
+         height: 330px;
+         width: 300px;
+         border-radius: 15px;
+         overflow: hidden;
+         display: flex;
+         flex-direction: column;
+         box-shadow: 4px 4px 5px #351b06;
+
+      }
+
+      img {
+         height: 200px;
+         width: 350px;
+      }
+
+      /* Overlay background */
+      .overlay {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background: rgba(0, 0, 0, 0.719);
+         display: none;
+         justify-content: center;
+         align-items: center;
+         z-index: 1000;
+      }
+
+      /* Recipe modal */
+      .recipe-modal {
+         background-color: rgb(83, 33, 14);
+         padding: 20px;
+         border-radius: 8px;
+         width: 500px;
+         max-height: 80%;
+         overflow-y: auto;
+         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+         position: relative;
+         color: rgba(255, 255, 255, 0.904);
+      }
+
+      .close-btn {
+         position: absolute;
+         top: 10px;
+         right: 15px;
+         font-size: 18px;
+         cursor: pointer;
+         color: #ffffff;
+      }
+
+      .close-btn:active {
+         background-color: crimson;
+         height: 30px;
+         width: 5%;
+         text-align: center;
+         align-content: center;
+      }
+
+      .info-boxes {
+         display: flex;
+         justify-content: space-between;
+         margin: 10px 0;
+      }
+
+      .info-box {
+         flex: 1;
+         background: rgb(240, 168, 134);
+         margin: 5px;
+         padding: 10px;
+         border-radius: 6px;
+         text-align: center;
+         color: black;
+         align-content: center;
+      }
+
+      .back-btn {
+         margin: 20px auto;
+         display: block;
+         padding: 10px 20px;
+         font-size: 16px;
+         background-color: #2c1503;
+         color: white;
+         border: none;
+         border-radius: 6px;
+         cursor: pointer;
+      }
+
+      .back-btn:hover {
+         background-color: cornflowerblue;
+         color: black;
+      }
+
+      #cook1 h2 {
+         text-align: center;
+         font-size: 3rem;
+         color: white;
+      }
+
+      #cook2 h2 {
+         text-align: center;
+         font-size: 3rem;
+         color: white;
+      }
+
+      #cook3 h2 {
+         text-align: center;
+         font-size: 3rem;
+         color: white;
+      }
+
+      .up {
+         text-align: center;
+         color: rgb(116, 134, 134);
+      }
+
+      #recipeContent {
+         font-size: larger;
+      }
+     
+      
+
+   </style>
+</head>
+
+<body>
+   <div id="main">
+      <div class="second">
+         <h1>What's your <i>level?</i></h1>
+         <div class="inner" data-target="cook1">Kitchen Newbie</div>
+         <div class="inner" data-target="cook2">Accceptable Cook</div>
+         <div class="inner" data-target="cook3">Master Chef</div>
+      </div>
+   </div>
+
+
+
+   <!-- KITCHEN NEWBIE SECTION -->
+   <section id="cook1">
+      <div>
+         <h2>Let's get this kitchen party started!</h2>
+         <p class="up">Relax, the smoke alarm is just your cheerleader, it claps every time you cook.</p>
+         <div id="first"></div>
+         <button class="back-btn" onclick="backToMenu()">
+            << Back</button>
+      </div>
+   </section>
+
+   <!-- Overlay + modal -->
+   <div class="overlay" id="overlay">
+      <div class="recipe-modal" id="recipeModal">
+         <span class="close-btn" onclick="closeRecipe()">✖</span>
+         <h2 id="recipeTitle"></h2>
+         <img src="" alt="" id="image" style="width:100%;border-radius:8px;">
+         <div class="info-boxes">
+            <div class="info-box" id="timeBox"></div>
+            <div class="info-box" id="caloriesBox"></div>
+            <div class="info-box" id="noteBox"></div>
+         </div>
+         <div id="recipeContent"></div>
+      </div>
+   </div>
+
+
+   <!-- ACCEPTBLE COOK -->
+   <section id="cook2">
+      <div>
+         <h2>Let's get this kitchen party started!</h2>
+         <p class="up">Relax, the smoke alarm is just your cheerleader, it claps every time you cook.</p>
+         <div id="second"></div>
+         <button class="back-btn" onclick="backToMenu()">
+            << Back </button>
+      </div>
+   </section>
+
+   <!-- Overlay + modal -->
+   <div class="overlay" id="overlay">
+      <div class="recipe-modal" id="recipeModal">
+         <span class="close-btn" onclick="closeRecipe()">✖</span>
+         <h2 id="recipeTitle"></h2>
+         <img src="" alt="" id="image" style="width:100%;border-radius:8px;">
+         <div class="info-boxes">
+            <div class="info-box" id="timeBox"></div>
+            <div class="info-box" id="caloriesBox"></div>
+            <div class="info-box" id="noteBox"></div>
+         </div>
+         <div id="recipeContent"></div>
+      </div>
+   </div>
+
+
+   <!-- MASTER CHEF -->
+   <section id="cook3">
+      <div>
+         <h2>Let's get this kitchen party started!</h2>
+         <p class="up">Relax, the smoke alarm is just your cheerleader, it claps every time you cook.</p>
+         <div id="third"></div>
+         <button class="back-btn" onclick="backToMenu()">
+            << Back </button>
+      </div>
+   </section>
+
+   <!-- Overlay + modal -->
+   <div class="overlay" id="overlay">
+      <div class="recipe-modal" id="recipeModal">
+         <span class="close-btn" onclick="closeRecipe()">✖</span>
+         <h2 id="recipeTitle"></h2>
+         <img src="" alt="" id="image" style="width:100%;border-radius:8px;">
+         <div class="info-boxes">
+            <div class="info-box" id="timeBox"></div>
+            <div class="info-box" id="caloriesBox"></div>
+            <div class="info-box" id="noteBox"></div>
+         </div>
+         <div id="recipeContent"></div>
+      </div>
+   </div>
+
+
+
+
+   <script>
+      function backToMenu() {
+         // Hide all sections
+         document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+         // Show the main menu again
+         document.getElementById('main').style.display = 'block';
+      }
+
+      document.querySelectorAll('.inner').forEach(div => {
+         div.addEventListener('click', () => {
+            // hide menu
+            document.getElementById('main').style.display = 'none';
+
+            // show target section
+            const targetId = div.getAttribute('data-target');
+            document.getElementById(targetId).style.display = 'block';
+         });
+      });
+
+      // RECIPE ARRAY WITH OBJECT
+      let recipecard = [
+         {
+            img: 'https://media.istockphoto.com/id/1388417437/photo/homemade-italian-spaghetti-algio-e-olio.jpg?s=612x612&w=0&k=20&c=gocHozUlPyNStETLkDTqU5uTOQYDWLXLa8_FCb_yCjM=',
+            name: 'Spaghetti Aglio e Olio',
+            info: '- A simple swirl of garlic and oil that turns pasta into poetry.'
+         },
+         {
+            img: 'https://i0.wp.com/www.mylittlemoppet.com/wp-content/uploads/2019/06/feature.jpg',
+            name: 'Meethi Seviyan (Sweet Vermicelli)',
+            info: 'A sizzling symphony of color, crunch, and savory delight.'
+         },
+
+         {
+            img: 'https://www.teaforturmeric.com/wp-content/uploads/2022/08/Chicken-Pulao-on-a-platter-500x500.jpg',
+            name: 'Chicken Pulao (Rice with Chicken)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+         {
+            img: 'https://images.getrecipekit.com/20251020160700-delicious-20banana-20chocolate-20chip-20pancakes-20recipe-20uk-20.png?aspect_ratio=4:3&quality=90&',
+            name: 'Banana Pancakes (2-ingredient)',
+            info: 'Golden stacks kissed with banana sweetness, perfect for slow mornings.'
+         },
+         {
+            img: 'https://modernmealmakeover.com/wp-content/uploads/2020/10/IMG_6548-4-800x530.jpg.webp',
+            name: 'Chicken Rice Bowl',
+            info: 'Comfort in a bowl—hearty grains topped with tender bites of chicken.'
+         },
+
+         {
+            img: 'https://i.ytimg.com/vi/oUI_TK-IeEc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA90SdVLJ61IGCIlh4ae7hX9MmFGw',
+            name: 'Aloo Ki Tikki (Potato Cutlets)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+
+         {
+            img: 'https://mypahadidukan.com/cdn/shop/articles/Kesar_Kheer_Recipe_ad0e3b6b-d2aa-45b9-89e0-a7e986ea0bec.jpg?v=1761216555',
+            name: 'Kheer (Rice Pudding)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+         {
+            img: 'https://www.eatlivetravelwrite.com/wp-content/uploads/2014/04/DSC_6056-480x480.jpg',
+            name: 'Grilled Cheese & Tomato Soup',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+
+         {
+            img: 'https://www.honeywhatscooking.com/wp-content/uploads/2024/03/Aloo-palak-potatoes-spinach-480x270.jpg',
+            name: 'Aloo Palak (Potato & Spinach Curry)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+         {
+            img: 'https://static.vecteezy.com/system/resources/thumbnails/046/674/466/small/delicious-baked-ziti-served-on-a-platter-free-photo.jpg',
+            name: 'Baked Ziti',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+
+
+         {
+            img: 'https://swatisani.net/kitchen/wp-content/uploads/2015/10/IMG_9522.jpg',
+            name: 'Shahi Tukray (Bread Pudding)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+      ];
+      let output = '';
+      let main = document.getElementById('first');
+      recipecard.forEach(abc => {
+         output += `
+           <div id="first">
+            <div class="in" onclick="openRecipe('${abc.name}')">
+            <img src="${abc.img}" >
+           <div id='inn'>
+            <h3>${abc.name}</h3>
+            <p>${abc.info}</p>
+           </div>
+           </div>
+         </div>
+         `});
+      main.innerHTML = output;
+
+
+      // Recipe details
+      let recipes = {
+         "Spaghetti Aglio e Olio": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "Total Time: 35 mins",
+            calories: "Per Serving calories: 755",
+            note: "4 Serving",
+            ingredients: ['1 pound uncooked spaghetti',
+               '½ cup olive oil',
+               '6 cloves garlic, thinly sliced',
+               '¼ teaspoon red pepper flakes, or to taste',
+               'salt and freshly ground black pepper to taste',
+               '¼ cup chopped fresh Italian parsley',
+               '1 cup finely grated Parmigiano-Reggiano cheese'],
+            steps: ['Gather all ingredients.', 'Bring a large pot of lightly salted water to a boil. Cook spaghetti in the boiling water, stirring occasionally until cooked through but firm to the bite, about 10 to 12 minutes. Drain and transfer to a pasta bowl.', 'While the pasta is cooking, combine olive oil and garlic in a cold skillet.', 'Cook over medium heat to slowly toast garlic, about 10 minutes. Reduce heat to medium-low when olive oil begins to bubble. Cook and stir until garlic is golden brown, about another 5 minutes. Remove from heat.', 'Stir red pepper flakes, salt, and black pepper into pasta.', 'Pour in hot olive oil and garlic, and sprinkle on Italian parsley and half of the Parmigiano-Reggiano cheese; toss until combined.', 'Serve pasta topped with the remaining Parmigiano-Reggiano cheese.']
+         },
+
+         "Meethi Seviyan (Sweet Vermicelli)": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "20 mins",
+            calories: "400 kcal",
+            note: "2 Serving",
+            ingredients: [
+               '3 tbsp salted butter',
+               '3 tbsp ghee',
+               '1 packet (150 g) seviyan (vermicelli), Note 1',
+               '2 cups water',
+               '¾ cup + 2 tbsp (175 g) raw cane sugar, or white granulated sugar',
+               '3-4 green cardamom pods, slightly broken open',
+               ' slivered/finely chopped almonds and/or finely chopped pistachios, for garnish'],
+            steps: ['Break up your vermicelli while it is still in the packet for an easy (and mess free!) way to achieve the texture you’ll need.', 'Add your butter and ghee to a pan and melt. Add the broken vermicelli noodles directly from the packet and toast until they go from golden to dark caramel in color and become aromatic, using a wooden spoon to further mash the vermicelli into small pieces in the pan. The key here is to toast the vermicelli until it changes to a deep, caramel color. This gives complexity to an otherwise straightforward flavor profile. (Don’t skip toasting the vermicelli, even if you buy it pre-toasted.)', 'In another pan, bring the water, sugar, and cardamom pods to a simmer. Reduce the heat to low and simmer until the sugar has dissolved.', 'Pour the simple syrup into the toasted vermicelli and stir to combine. Bring to a boil over medium-high heat, and then reduce the heat to low. Cover and gently simmer until all of the water has absorbed or evaporated. ', 'Turn off the heat and allow the seviyan to rest, covered.', 'Transfer to your serving dish and garnish with finely chopped nuts and khoya if you like.']
+         },
+
+         "Chicken Pulao (Rice with Chicken)": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "46 mins",
+            calories: "400 kcal",
+            note: "4 Serving",
+            ingredients: ['1 ½ cups (285 g)', '2 tbsp neutral oil, such as grapeseed or avocado', '1 tbsp ghee', '1 medium yellow onion, thinly sliced', '2 small (1 large) bay leaves',
+               '1 / 2 tsp whole black peppercorns',
+               '1 2 - inch piece cinnamon stick',
+               '1 small black cardamom, optional',
+               '5 whole cloves',
+               '1 tsp cumin seeds',
+               '½ tsp coriander seeds, crushed',
+               '4 cloves garlic, crushed',
+               '3 / 4 inch piece ginger, crushed',
+               '1 lb boneless chicken(I prefer thighs or tenders but you may use breast), cubed into 1” pieces',
+               '1 small(50 g) tomato, finely chopped',
+               '1 - 2 green chili peppers, whole or chopped',
+               '1 1 / 2 cups water, (See Note 2)',
+               '2 ¼ tsp kosher salt, divided(or to taste)',
+               'small handful chopped cilantro and / or mint'
+            ],
+            steps: ['Thoroughly wash (See Note 1) the rice and soak it in water for 15 minutes. Then drain and set aside. I usually start pulao preparation while the rice is soaking.', 'Select the high Sauté setting on the Instant Pot. Once hot, add the oil, ghee, and thinly sliced onion. Sauté, stirring often, until the onions are golden brown (~8-10 minutes). Deglaze the pan with a tablespoon of water. The color of the onions will determine the color of the rice so you want to get them even and golden brown.', 'Add the whole spices, garlic, and ginger and sauté for another minute or until the raw smell disappears. Add the chicken and ¼ tsp of the salt and continue to sauté for 2-3 minutes until the color of the chicken changes. Add the tomato and green chili pepper and sauté until the tomato softens, about 2 minutes.', 'Add the rice, remaining salt, and water and stir to combine. Scrape the sides of the pot and gently press down the rice to make everything is submerged in the water.', 'Cancel the Sauté setting, secure the lid, and set the Pressure Release to Sealing. Pressure-cook on high setting for 6 minutes. Let naturally release for 15 minutes. Then manually release any remaining pressure by moving the Pressure Release to Venting. Sprinkle the cilantro/mint on top.', 'Using a rice paddle or small plastic plate, gently transfer the rice on to a serving platter. Serve with raita or yogurt.']
+         },
+
+         "Banana Pancakes (2-ingredient)": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "13 mins",
+            calories: "Per Serving Calories: 93",
+            note: "2-4 Serving",
+            ingredients: ['1 medium ripe banana',
+               '2 large eggs',
+               'Butter or oil, for cooking'],
+            steps: ['Make the batter:Mash the banana in a medium bowl. Aim for a paste-like consistency with no big chunks.Crack the eggs into the banana. Whisk the eggs and incorporate them gradually into the banana. The batter should be loose and liquidy, similar in consistency to regular pancake batter. If you want any extra flavorings in your pancake, now’s the time to add those!', 'Heat a nonstick frying pan over medium heat until a drop of water sizzles on contact. Add a little butter or oil to the pan and swirl it around.Drop spoonfuls of the pancake batter into the pan, about 2 tablespoons at a time. Leave some space between the pancakes so you have space to flip them. The batter should sizzle on contact; if not, turn up the heat slightly.Cook until the pancakes look dry and golden brown when you lift a corner with a spatula, about 1 minute. Sprinkle any toppings on the uncooked surface of your pancakes now.', 'Flip the pancakes by gently sliding a thin spatula under the pancake and turning it over onto an open part of the pan. If any batter spills as you do this, just nudge it back into shape with your spatula.            Cook until both sides are golden brown, another 1 to 2 minutes. You can flip the pancakes a few times if they’re not quite as golden as you’d like.', 'Eat immediately, topped with maple syrup, jam, or anything you like. If you’d like to serve everyone at once, you can keep the cooked pancakes warm on a sheet pan in a low oven until you’re ready to serve.Store leftover pancakes in the fridge, or stack them between parchment paper and freeze. Whether refrigerated or frozen, I like to reheat them in the toaster until they get crispy again. They also make a mighty fine snack eaten straight from the fridge while cold (don’t judge!).']
+         },
+
+         "Chicken Rice Bowl": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "20 mins",
+            calories: "222 kcal Chicken and sauce only",
+            note: "4 Serving",
+            ingredients: ['chicken: skinless boneless breasts or thighs',
+               'brown sugar: to sweeten the sauce, you can use honey instead',
+               'soy sauce: the base of the teriyaki sauce; I highly recommend using the low-sodium sauce',
+               'vinegar: I used apple cider vinegar but rice vinegar works great too',
+               'ginger: fresh or ground',
+               'garlic: fresh or ground, fresh gives stronger flavor',
+               'cornstarch: necessary to thicken the sauce.',
+               'rice: classic side to any Asian dish'],
+            steps: ['Cut the chicken breast into bite size pieces, seasoned it with salt and pepper and cooked in a pan until no longer pink.', 'In a measuring glass cup or small mixing bowl, whisk the sauce ingredients. Added to the chicken in a pan. It will cook and thicken quickly coating the chicken pieces with a sweet, shiny glaze that is out of this world delicious!', 'Serve with rice and steamed broccoli.', 'SAUCE:The sauce is made with brown sugar, soy sauce (I always use the low-sodium option), fresh minced garlic, ground ginger, rice or apple cider vinegar and cornstarch that helps it thicken. That is it! Asian flavors on point! You can make it ahead of time and store in the fridge until you are ready to use it.']
+         },
+
+         "Aloo Ki Tikki (Potato Cutlets)": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "45 mins",
+            calories: "Per Serving Calories: 150",
+            note: "5 Serving",
+            ingredients: ['2 ½ medium-size potatoes, washed thoroughly',
+               '1 teaspoon salt',
+               '1 tablespoon garam masala',
+               '1 tablespoon coriander powder',
+               '1 tablespoon black pepper',
+               '5 cilantro leaves, chopped',
+               '3 tablespoons bread crumbs',
+               'oil for frying'],
+            steps: ['Place unpeeled potatoes in a large saucepan, fill with water, and place over high heat. Bring to a boil; cook until potatoes are soft and tender. Drain, cool, and peel potatoes.', 'Place potatoes in a large bowl. Add salt, garam masala, coriander powder, pepper, and cilantro. Mash with a large fork or potato masher until there are no lumps. Shape potatoes into flat cutlets, about 2 or 3 inches in diameter and 1 inch thick. Coat each cutlet lightly in bread crumbs, and set aside.', 'Heat about 2 tablespoons oil in a large skillet over medium heat. Fry potato cutlets in batches until golden brown on both sides. Between batches, add oil as needed.',]
+         },
+
+         "Kheer (Rice Pudding)": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "35 mins",
+            calories: "Per Serving Calories: 513 cal",
+            note: "4 Serving",
+            ingredients: ['2 cups coconut milk',
+               '2 cups milk',
+               '3 tablespoons white sugar',
+               '½ cup basmati rice',
+               '¼ cup raisins',
+               '½ teaspoon ground cardamom',
+               '½ teaspoon rose water (Optional)',
+               '¼ cup sliced almonds, toasted',
+               '¼ cup chopped pistachio nuts'],
+            steps: ['Bring coconut milk, milk, and sugar to a boil in a large saucepan over medium heat. Add rice, reduce the heat to low, and simmer until mixture thickens and rice is tender, about 20 minutes.', 'Stir in raisins, cardamom, and rose water; cook for a few more minutes. Ladle into serving bowls and garnish with almonds and pistachios.']
+         },
+
+         "Grilled Cheese & Tomato Soup": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "50-55 mins",
+            calories: "57 kcal",
+            note: "Servings: 8",
+            ingredients: ['minced garlic cloves',
+               'diced tomatoes & liquid',
+               'dried thyme',
+               'onion powder',
+               'basil puree or fresh basil leaves',
+               'chicken broth – chicken stock or vegetable broth',
+               'heavy whipping cream',
+               'garlic salt and black pepper – add red pepper flakes to give it a bit of spice croutons',
+               'Parmesan cheese', 'bread ', 'cheese ', 'butter – or mayonnaise or olive oil', 'garlic salt'],
+            steps: ['COOK. Saute the garlic in a large pot over medium heat until fragrant.',
+               'Add the tomatoes, fresh basil, thyme, and onion powder to the pot. (not the tomato liquid). Stir and cook for 10 minutes.', 'Reduce the heat to medium-low and add the chicken broth and the tomato liquid. Stir and allow to simmer, uncovered, for 35-40 minutes. Stir occasionally.',
+               'BLEND. Add garlic salt and pepper to taste. Working in small batches add the soup to a blender. Blend the chunky mixture until it is smooth and creamy. Pour into a large serving bowl. Repeat with the remaining soup until it has all been blended and added to a serving bowl. (You can also use an immersion blender to blend it directly in the pot.)', 'GARNISH + SERVE. Stir the heavy cream into the blended mixture. Mix until well combined.Add more garlic salt and pepper to taste. Garnish with croutons, basil, and Parmesan Cheese', 'BREAD. Heat a skillet over medium heat. Butter one side of each slice of bread per sandwich (or spread with mayo) and lay one slice, butter side down, on the skillet.', 'CHEESE. Add 1 slice of cheddar and 1 slice of provolone cheese to the bread slices, then top with the other piece of bread, butter side up.', 'COOK. Cook until golden brown on both sides and the cheese is melted, about 2 minutes per side.']
+         },
+
+         "Aloo Palak (Potato & Spinach Curry)": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "30 mins",
+            calories: "Per Serving Calories:330 kcal",
+            note: "3 Servings.",
+            ingredients: ['Type of spinach: Different types of spinach will require different cook times. Baby spinach cooks faster while bunch spinach takes a bit more time.', 'Quantity: The amount of spinach isn’t set in stone. You can decrease the amount of spinach without changing the recipe otherwise. (This is probably why the varying amounts of spinach have always worked!)', 'Potatoes: Frankly, any potatoes could work since you’re boiling them on the side. If you’re going the traditional route of cooking the potatoes within the dish, then opt for Russet potatoes or red potatoes because of their quicker cooking time.', 'Oil, onions, tomatoes, green chili peppers: Essentials for most South Asian dinner recipes.', 'Garlic & Ginger: I crush mine in a mortar or pestle or in a food processor. You can also use garlic or ginger paste if that’s what you have on hand.', 'Spices: You’ll need cumin seeds along with ground spices such as coriander powder, cumin powder, red chili powder, and turmeric powder. Garam masala is optional.'],
+            steps: ['If using fresh spinach, wash and pick the leaves. Tedious I know, but washing greens has always made me feel calm and connected to the earth.', 'Finely chop the spinach leaves using a food processor.', 'Tip: I use my food processor to chop the onion (pulse to chop so it doesn’t get all watery), tomato, garlic, and ginger.', 'Boil the potatoes with some salt. Alternatively, you can leave the potatoes raw and cook them alongside the spinach (more traditional, less quick).', 'Sauté the onion, then add the garlic, ginger, and green chili pepper. You want to get it nice and golden.', 'Stir in the the chopped tomatoes, spices, and salt. Cook until the tomatoes soften and the oil starts leaving the sides.', 'Add the chopped spinach and stir-fry to reduce down. Leaving the pan uncovered here ensures that the spinach retains its vibrant green color, taste, and nutrients.', 'But, you want to make sure to get rid of any raw taste in the spinach. If it needs to cook further (which may be likely unless you’ve used baby spinach), lower the heat, add water, and cover to cook until it no longer has a raw taste.', 'Toss in the boiled potatoes and stir to coat. Sprinkle in lime or lemon juice.']
+         },
+
+         "Baked Ziti": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "2 hrs 15 mins",
+            calories: "Per Serving Calories: 627",
+            note: "10 Servings",
+            ingredients: ['¾ pound hot Italian sausage',
+               '¾ pound sweet Italian sausage',
+               '2 tablespoons olive oil',
+               '1 large yellow onion, diced',
+               '½ teaspoon dried oregano',
+               '¼ teaspoon dried thyme',
+               '¼ teaspoon dried rosemary',
+               '2 (24-ounce) jars prepared, marinara sauce',
+               '2 cups water',
+               '1 (16-ounce) package ziti pasta',
+               '1 drizzle olive oil, or as needed, for greasing',
+               '1 ½ cups whole-milk ricotta cheese',
+               '8 ounces mozzarella cheese, cut into small cubes',
+               '1 cup grated Pecorino Romano cheese',
+               '1 teaspoon chopped flat-leaf parsley, or to taste'],
+            steps: ['Gather the ingredients. Cut down the length of each sausage with a sharp knife. Remove and discard casings.', 'Heat olive oil in a large saucepan set over high heat. Add sausages and onion. Cook, stirring occasionally and breaking up with a spatula, until sausage begins to brown, and onion turns translucent, 5 to 7 minutes. Add oregano, thyme, and rosemary and cook for 1 minute more.', 'Pour in marinara sauce. Pour 1 cup water into each jar to rinse out remaining sauce; add to the saucepan. Stir together and bring sauce to a simmer.', 'Reduce the heat to medium-low, and let simmer, stirring occasionally, for 1 hour. Taste for seasoning and adjust if needed. Turn off heat and reserve until needed. Before using, skim any excess fat that rises to the surface.', 'While sauce simmers, bring a large pot of generously salted water to a boil. Add ziti and cook, stirring occasionally, for 1 or 2 minutes less than the directions on the package call for, about 8 minutes. Drain well and transfer into a large mixing bowl.', 'Carefully add the meat sauce and stir until thoroughly combined. Let rest for 5 minutes. Meanwhile, preheat the oven to 375 degrees F (190 degrees C). Grease a large 9x15-inch casserole dish with a drizzle of olive oil. If you need to use a 9x13-inch dish, reserve about 1 cup cooked pasta to avoid overfilling and bubbling over.', 'Use a slotted spoon to transfer half of the pasta and sauce mixture to the prepared dish, then use a spatula to even out into a uniform layer. Top with 1/2 of the ricotta cheese, 1/2 of the mozzarella cheese, and then 1/2 of the grated Pecorino Romano cheese, being sure to distribute evenly. Top with the rest of the pasta and sauce mixture and give the pan a little shake to settle the sauce. Repeat the cheese application.', 'Bake in the center of the preheated oven until the cheese is melted and the casserole is piping hot, 30 to 35 minutes. Remove from the oven and let cool 10 to 15 minutes before serving. Top with parsley.']
+         },
+
+         "Shahi Tukray (Bread Pudding)": {
+            img: 'https://as2.ftcdn.net/jpg/03/32/45/21/1000_F_332452105_YtyVjzTGTQ8t8ORPjs9rZXoi3RAjUMCt.jpg',
+            time: "55 mins",
+            calories: "400 kcal",
+            note: "8 Serving.",
+            ingredients: ['4 slices white bread edges removed, each slice cut in four triangles',
+               '1 cup oil canola/sunflower/vegetable',
+               '3 cups whole milk',
+               'Pinch saffron threads toasted and ground',
+               '6 cardamom pods removed and seeds ground',
+               '3 eggs beaten',
+               '½ cup sugar or to taste',
+               '1 tablespoon pistachios crushed'],
+            steps: ['Pre-heat oven to 350° F. Butter a square baking dish.', 'Heat oil in a non-stick frying pan. Fry bread in batches, about 1-2 minutes each side until golden brown. Add extra oil as needed. Remove from heat.', 'Arrange bread in layers in buttered baking dish.', 'Place milk in saucepan and bring to boil. Lower heat. Add ground saffron and cardamom, and let it simmer for 10 minutes. Occasionally stir and remove any milk residue with a wooden spoon. Remove from heat.', 'While the milk simmers on low heat, beat eggs and sugar with a whisk in a large bowl until well-mixed.', 'Pour milk into the egg and sugar mixture, and beat again until well-mixed.', 'Pour custard over bread, and bake uncovered for 25 minutes.', 'Top with crushed pistachios.']
+         },
+      };
+
+      function openRecipe(name) {
+         document.getElementById('overlay').style.display = 'flex';
+         document.getElementById('recipeTitle').innerText = name;
+         const recipe = recipes[name];
+         document.getElementById('image').src = recipe.img;
+         document.getElementById('timeBox').innerText = "⏱ " + recipe.time;
+         document.getElementById('caloriesBox').innerText = "🔥 " + recipe.calories;
+         document.getElementById('noteBox').innerText = "💡 " + recipe.note;
+
+         let content = "<h4>Ingredients:</h4><ul>";
+         recipe.ingredients.forEach(i => content += `<li>${i}</li>`);
+         content += "</ul><h4>Steps:</h4><ol>";
+         recipe.steps.forEach(s => content += `<li>${s}</li>`);
+         content += "</ol>";
+         document.getElementById('recipeContent').innerHTML = content;
+      }
+
+      function closeRecipe() {
+         document.getElementById('overlay').style.display = 'none';
+      }
+
+
+      //   cook2
+      //  ARRAY WITH OBJECT
+      let recipecar = [
+         {
+            img: 'https://media.istockphoto.com/id/1388417437/photo/homemade-italian-spaghetti-algio-e-olio.jpg?s=612x612&w=0&k=20&c=gocHozUlPyNStETLkDTqU5uTOQYDWLXLa8_FCb_yCjM=',
+            name: 'Spaghetti Aglio e Olio',
+            info: '- A simple swirl of garlic and oil that turns pasta into poetry.'
+         },
+         {
+            img: 'https://i0.wp.com/www.mylittlemoppet.com/wp-content/uploads/2019/06/feature.jpg',
+            name: 'Meethi Seviyan (Sweet Vermicelli)',
+            info: 'A sizzling symphony of color, crunch, and savory delight.'
+         },
+
+         {
+            img: 'https://www.teaforturmeric.com/wp-content/uploads/2022/08/Chicken-Pulao-on-a-platter-500x500.jpg',
+            name: 'Chicken Pulao (Rice with Chicken)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+         {
+            img: 'https://images.getrecipekit.com/20251020160700-delicious-20banana-20chocolate-20chip-20pancakes-20recipe-20uk-20.png?aspect_ratio=4:3&quality=90&',
+            name: 'Banana Pancakes (2-ingredient)',
+            info: 'Golden stacks kissed with banana sweetness, perfect for slow mornings.'
+         },
+         {
+            img: 'https://modernmealmakeover.com/wp-content/uploads/2020/10/IMG_6548-4-800x530.jpg.webp',
+            name: 'Chicken Rice Bowl',
+            info: 'Comfort in a bowl—hearty grains topped with tender bites of chicken.'
+         },
+
+         {
+            img: 'https://i.ytimg.com/vi/oUI_TK-IeEc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA90SdVLJ61IGCIlh4ae7hX9MmFGw',
+            name: 'Aloo Ki Tikki (Potato Cutlets)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+
+         {
+            img: 'https://mypahadidukan.com/cdn/shop/articles/Kesar_Kheer_Recipe_ad0e3b6b-d2aa-45b9-89e0-a7e986ea0bec.jpg?v=1761216555',
+            name: 'Kheer (Rice Pudding)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+         {
+            img: 'https://www.eatlivetravelwrite.com/wp-content/uploads/2014/04/DSC_6056-480x480.jpg',
+            name: 'Grilled Cheese & Tomato Soup',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+
+         {
+            img: 'https://www.honeywhatscooking.com/wp-content/uploads/2024/03/Aloo-palak-potatoes-spinach-480x270.jpg',
+            name: 'Aloo Palak (Potato & Spinach Curry)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+         {
+            img: 'https://static.vecteezy.com/system/resources/thumbnails/046/674/466/small/delicious-baked-ziti-served-on-a-platter-free-photo.jpg',
+            name: 'Baked Ziti',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+
+
+         {
+            img: 'https://swatisani.net/kitchen/wp-content/uploads/2015/10/IMG_9522.jpg',
+            name: 'Shahi Tukray (Bread Pudding)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+      ];
+      let out = '';
+      let mai = document.getElementById('second');
+      recipecard.forEach(abc => {
+         out += `
+           <div id="second">
+            <div class="in" onclick="openRecipe('${abc.name}')">
+            <img src="${abc.img}" >
+           <div id='inn'>
+            <h3>${abc.name}</h3>
+            <p>${abc.info}</p>
+           </div>
+           </div>
+         </div>
+         `});
+      mai.innerHTML = out;
+
+
+      // cook3
+      // RECIPE ARRAY WITH OBJECT
+      let recipecart = [
+         {
+            img: 'https://media.istockphoto.com/id/1388417437/photo/homemade-italian-spaghetti-algio-e-olio.jpg?s=612x612&w=0&k=20&c=gocHozUlPyNStETLkDTqU5uTOQYDWLXLa8_FCb_yCjM=',
+            name: 'Spaghetti Aglio e Olio',
+            info: '- A simple swirl of garlic and oil that turns pasta into poetry.'
+         },
+         {
+            img: 'https://i0.wp.com/www.mylittlemoppet.com/wp-content/uploads/2019/06/feature.jpg',
+            name: 'Meethi Seviyan (Sweet Vermicelli)',
+            info: 'A sizzling symphony of color, crunch, and savory delight.'
+         },
+
+         {
+            img: 'https://www.teaforturmeric.com/wp-content/uploads/2022/08/Chicken-Pulao-on-a-platter-500x500.jpg',
+            name: 'Chicken Pulao (Rice with Chicken)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+         {
+            img: 'https://images.getrecipekit.com/20251020160700-delicious-20banana-20chocolate-20chip-20pancakes-20recipe-20uk-20.png?aspect_ratio=4:3&quality=90&',
+            name: 'Banana Pancakes (2-ingredient)',
+            info: 'Golden stacks kissed with banana sweetness, perfect for slow mornings.'
+         },
+         {
+            img: 'https://modernmealmakeover.com/wp-content/uploads/2020/10/IMG_6548-4-800x530.jpg.webp',
+            name: 'Chicken Rice Bowl',
+            info: 'Comfort in a bowl—hearty grains topped with tender bites of chicken.'
+         },
+
+         {
+            img: 'https://i.ytimg.com/vi/oUI_TK-IeEc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA90SdVLJ61IGCIlh4ae7hX9MmFGw',
+            name: 'Aloo Ki Tikki (Potato Cutlets)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+
+         {
+            img: 'https://mypahadidukan.com/cdn/shop/articles/Kesar_Kheer_Recipe_ad0e3b6b-d2aa-45b9-89e0-a7e986ea0bec.jpg?v=1761216555',
+            name: 'Kheer (Rice Pudding)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+         {
+            img: 'https://www.eatlivetravelwrite.com/wp-content/uploads/2014/04/DSC_6056-480x480.jpg',
+            name: 'Grilled Cheese & Tomato Soup',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+
+         {
+            img: 'https://www.honeywhatscooking.com/wp-content/uploads/2024/03/Aloo-palak-potatoes-spinach-480x270.jpg',
+            name: 'Aloo Palak (Potato & Spinach Curry)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+         {
+            img: 'https://static.vecteezy.com/system/resources/thumbnails/046/674/466/small/delicious-baked-ziti-served-on-a-platter-free-photo.jpg',
+            name: 'Baked Ziti',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+
+
+         {
+            img: 'https://swatisani.net/kitchen/wp-content/uploads/2015/10/IMG_9522.jpg',
+            name: 'Shahi Tukray (Bread Pudding)',
+            info: 'The ultimate cozy duo—crispy, gooey, and dipped in warmth.'
+         },
+      ];
+      let our = '';
+      let mean = document.getElementById('third');
+      recipecart.forEach(abc => {
+         our += `
+           <div id="third">
+            <div class="in" onclick="openRecipe('${abc.name}')">
+            <img src="${abc.img}" >
+           <div id='inn'>
+            <h3>${abc.name}</h3>
+            <p>${abc.info}</p>
+           </div>
+           </div>
+         </div>
+         `});
+      mean.innerHTML = our;
+
+   </script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 
 # recipe-website
-I has enhanced my final project and I also make it responsive. Here's a quick summary of my website.
+I have enhanced my final project and I also make it responsive. Here's a quick summary of my website.
 This website was developed with a clear focus on structure, responsiveness, and user engagement. The foundation was built using HTML to organize content into distinct sections such as About, Contact, and Recipes. Each section was carefully designed to serve its purpose: the About page introduces the philosophy behind the site, the Contact page fosters community interaction, and the Recipes page showcases the core content with engaging descriptions and layouts. Semantic HTML elements were used throughout to ensure accessibility and clarity, making the site easy to navigate and inclusive for all users.
 
 A major emphasis was placed on responsiveness. To achieve this, CSS flexbox and grid systems were implemented, allowing the layout to adapt seamlessly across different screen sizes. Media queries were applied to adjust typography, spacing, and image scaling, ensuring that the site remains visually appealing and functional whether viewed on desktop, tablet, or mobile devices. The navigation bar was enhanced with smooth scrolling and adaptive styling, providing a professional and user-friendly browsing experience.
